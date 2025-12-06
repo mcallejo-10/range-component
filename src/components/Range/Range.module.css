@@ -1,0 +1,95 @@
+.container {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.labels {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    gap: 1rem;
+}
+
+.label {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #333;
+    min-width: 60px;
+    text-align: center;
+}
+
+.input {
+    width: 70px;
+    padding: 0.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    text-align: center;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    background-color: white;
+    transition: border-color 0.2s;
+}
+
+.input:hover {
+    border-color: #999;
+}
+
+.input:focus {
+    outline: none;
+    border-color: #007bff;
+}
+
+.rangeWrapper {
+    position: relative;
+    padding: 1rem 0;
+}
+
+.rangeTrack {
+    position: relative;
+    width: 100%;
+    height: 6px;
+    background-color: #e0e0e0;
+    border-radius: 3px;
+}
+
+.rangeActive {
+    position: absolute;
+    height: 100%;
+    background-color: #007bff;
+    border-radius: 3px;
+    top: 0;
+    pointer-events: none;
+}
+
+.handle {
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 24px;
+    height: 24px;
+    background-color: #ffffff;
+    border: 3px solid #007bff;
+    border-radius: 50%;
+    cursor: grab;
+    transition: transform 0.2s, box-shadow 0.2s;
+    z-index: 2;
+}
+
+.handle:hover {
+    transform: translate(-50%, -50%) scale(1.2);
+    box-shadow: 0 2px 8px rgba(0, 123, 255, 0.3);
+}
+
+.handle:active,
+.handleDragging {
+    cursor: grabbing;
+    transform: translate(-50%, -50%) scale(1.15);
+}
+
+.handle:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.4);
+}
+
