@@ -10,6 +10,7 @@ export interface RangeProps {
     onMaxChange: (value: number) => void;
     step?: number;
     fixedValues?: number[];
+    formatValue?: (value: number) => string;
     editable?: boolean;  
 }
 
