@@ -37,11 +37,11 @@ export default function Exercise1() {
   }, []);
 
   const handleMinChange = (value: number) => {
-    setCurrentMin(value);
+     setCurrentMin(Math.round(value * 100) / 100);
   };
 
   const handleMaxChange = (value: number) => {
-    setCurrentMax(value);
+    setCurrentMax(Math.round(value * 100) / 100);
   };
 
   if (loading) {
@@ -90,7 +90,7 @@ export default function Exercise1() {
 
         <div className={styles.info}>
           <p>Rango permitido: {minValue} - {maxValue}</p>
-          <p>Valores seleccionados: {currentMin} - {currentMax}</p>
+          <p>Valores seleccionados: {currentMin.toFixed(2)} - {currentMax.toFixed(2)}</p>
         </div>
       </div>
     </main>
