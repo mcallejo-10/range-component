@@ -26,7 +26,7 @@ export default function Exercise2() {
         
         setError(null);
       } catch (err) {
-        setError('Error al cargar los datos del rango');
+        setError('Error loading range data');
         console.error(err);
       } finally {
         setLoading(false);
@@ -54,7 +54,7 @@ export default function Exercise2() {
       <main className={styles.main}>
         <div className={styles.container}>
           <h1 className={styles.title}>Exercise 2: Fixed Values Range</h1>
-          <p>Cargando datos...</p>
+          <p>Loading data...</p>
         </div>
       </main>
     );
@@ -67,7 +67,7 @@ export default function Exercise2() {
           <h1 className={styles.title}>Exercise 2: Fixed Values Range</h1>
           <p className={styles.error}>{error}</p>
           <button onClick={() => window.location.reload()}>
-            Reintentar
+            Retry
           </button>
         </div>
       </main>
@@ -95,7 +95,7 @@ export default function Exercise2() {
         </div>
 
         <div className={styles.info}>
-          <p>Valores disponibles:</p>
+          <p>Available values:</p>
           <div className={styles.values}>
             {rangeValues.map((value, index) => (
               <span 

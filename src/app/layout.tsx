@@ -18,7 +18,7 @@ export default function RootLayout({
         <nav className="navbar">
           <div className="nav-container">
             <Link href="/" className="nav-brand">
-              Mango Range Component
+              Range Component
             </Link>
             <div className="nav-links">
               <Link href="/exercise1" className="nav-link">

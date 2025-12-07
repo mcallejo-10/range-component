@@ -15,14 +15,14 @@ export default function Range({
     formatValue = (value: number) => value.toString(),
     editable = true,
 }: RangeProps ) {
-    // Validaciones defensivas para evitar crashes
+    // Defensive validations to prevent crashes
     if (minValue === undefined || maxValue === undefined || 
         currentMin === undefined || currentMax === undefined) {
-        return <div className={styles.container}>Error: valores de rango no válidos</div>;
+        return <div className={styles.container}>Error: invalid range values</div>;
     }
 
     if (type === 'fixed' && fixedValues.length === 0) {
-        return <div className={styles.container}>Error: no hay valores fijos disponibles</div>;
+        return <div className={styles.container}>Error: no fixed values available</div>;
     }
 
     const rangeRef = useRef<HTMLDivElement>(null);

@@ -22,7 +22,7 @@ describe('Exercise1 Page', () => {
     render(<Exercise1 />);
 
     expect(screen.getByText('Exercise 1: Normal Range')).toBeInTheDocument();
-    expect(screen.getByText('Cargando datos...')).toBeInTheDocument();
+    expect(screen.getByText('Loading data...')).toBeInTheDocument();
   });
 
   it('should load and display range data successfully', async () => {
@@ -36,18 +36,18 @@ describe('Exercise1 Page', () => {
 
     // Esperar a que desaparezca el loading
     await waitFor(() => {
-      expect(screen.queryByText('Cargando datos...')).not.toBeInTheDocument();
+      expect(screen.queryByText('Loading data...')).not.toBeInTheDocument();
     });
 
     // Verificar que se renderiza el título
     expect(screen.getByText('Exercise 1: Normal Range')).toBeInTheDocument();
 
     // Verificar que se muestra la información del rango
-    expect(screen.getByText(/Rango permitido:/)).toBeInTheDocument();
-    expect(screen.getByText(/Valores seleccionados:/)).toBeInTheDocument();
+    expect(screen.getByText(/Allowed range:/)).toBeInTheDocument();
+    expect(screen.getByText(/Selected values:/)).toBeInTheDocument();
     
     // Los valores 1.00 € y 100.00 € aparecen múltiples veces en la página
-    const rangoPermitido = screen.getByText(/Rango permitido:/).textContent;
+    const rangoPermitido = screen.getByText(/Allowed range:/).textContent;
     expect(rangoPermitido).toContain('1.00 €');
     expect(rangoPermitido).toContain('100.00 €');
   });
@@ -62,11 +62,11 @@ describe('Exercise1 Page', () => {
 
     // Esperar a que aparezca el error
     await waitFor(() => {
-      expect(screen.getByText('Error al cargar los datos del rango')).toBeInTheDocument();
+      expect(screen.getByText('Error loading range data')).toBeInTheDocument();
     });
 
     // Verificar botón de reintentar
-    expect(screen.getByRole('button', { name: /reintentar/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /retry/i })).toBeInTheDocument();
   });
 
   it('should call service on mount', async () => {
@@ -90,7 +90,7 @@ describe('Exercise1 Page', () => {
     render(<Exercise1 />);
 
     await waitFor(() => {
-      expect(screen.queryByText('Cargando datos...')).not.toBeInTheDocument();
+      expect(screen.queryByText('Loading data...')).not.toBeInTheDocument();
     });
 
     // Verificar que existen los sliders (Range renderiza 2 inputs de tipo range)
@@ -111,11 +111,11 @@ describe('Exercise1 Page', () => {
     render(<Exercise1 />);
 
     await waitFor(() => {
-      expect(screen.queryByText('Cargando datos...')).not.toBeInTheDocument();
+      expect(screen.queryByText('Loading data...')).not.toBeInTheDocument();
     });
 
     // Verificar formato con 2 decimales y símbolo € (aparece múltiples veces)
-    const rangoText = screen.getByText(/Rango permitido:/).textContent;
+    const rangoText = screen.getByText(/Allowed range:/).textContent;
     expect(rangoText).toContain('5.50 €');
     expect(rangoText).toContain('50.75 €');
   });
@@ -129,12 +129,12 @@ describe('Exercise1 Page', () => {
     render(<Exercise1 />);
 
     await waitFor(() => {
-      expect(screen.queryByText('Cargando datos...')).not.toBeInTheDocument();
+      expect(screen.queryByText('Loading data...')).not.toBeInTheDocument();
     });
 
     // Los valores seleccionados inicialmente deben ser iguales al rango
-    const rangoText = screen.getByText(/Rango permitido:/);
-    const valoresText = screen.getByText(/Valores seleccionados:/);
+    const rangoText = screen.getByText(/Allowed range:/);
+    const valoresText = screen.getByText(/Selected values:/);
     
     expect(rangoText.textContent).toContain('20.00 €');
     expect(rangoText.textContent).toContain('80.00 €');
