@@ -4,6 +4,13 @@ Custom dual-handle Range slider component built with **Next.js 16**, **TypeScrip
 
 > Technical test for Mango - Frontend Developer position
 
+## 🌐 Live Demo
+
+**[View Live Demo on Vercel →](https://range-component-ochre.vercel.app/)**
+
+- **Exercise 1**: [Normal Range](https://range-component-ochre.vercel.app/exercise1) - Editable min/max values (1-100)
+- **Exercise 2**: [Fixed Values Range](https://range-component-ochre.vercel.app/exercise2) - Predefined currency values
+
 ## ✨ Features
 
 - 🎨 **Dual-handle slider** with smooth drag interactions
