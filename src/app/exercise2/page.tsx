@@ -46,7 +46,7 @@ export default function Exercise2() {
 
   // Función para formatear valores como moneda
   const formatCurrency = (value: number): string => {
-    return `€${value.toFixed(2)}`;
+    return `${value.toFixed(2)} €`;
   };
 
   if (loading) {
@@ -78,22 +78,21 @@ export default function Exercise2() {
     <main className={styles.main}>
       <div className={styles.container}>
         <h1 className={styles.title}>Exercise 2: Fixed Values Range</h1>
-        <p className={styles.description}>
-          Arrastra los handles para seleccionar precios fijos
-        </p>
 
-        <Range
-          type="fixed"
-          minValue={rangeValues[0]}
-          maxValue={rangeValues[rangeValues.length - 1]}
-          currentMin={currentMin}
-          currentMax={currentMax}
-          onMinChange={handleMinChange}
-          onMaxChange={handleMaxChange}
-          fixedValues={rangeValues}
-          formatValue={formatCurrency}
-          editable={false}
-        />
+        <div className={styles.rangeArea}>
+          <Range
+            type="fixed"
+            minValue={rangeValues[0]}
+            maxValue={rangeValues[rangeValues.length - 1]}
+            currentMin={currentMin}
+            currentMax={currentMax}
+            onMinChange={handleMinChange}
+            onMaxChange={handleMaxChange}
+            fixedValues={rangeValues}
+            formatValue={formatCurrency}
+            editable={false}
+          />
+        </div>
 
         <div className={styles.info}>
           <p>Valores disponibles:</p>

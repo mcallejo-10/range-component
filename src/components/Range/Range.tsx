@@ -114,69 +114,83 @@ export default function Range({
 
     return (
         <div className={styles.container}>
-            <div className={styles.labels}>
-                {editable ? (
-                    <input
-                        type="text"
-                        value={minInput}
-                        onChange={handleMinInputChange}
-                        onBlur={handleMinInputBlur}
-                        className={styles.input}
-                        aria-label="Minimum value"
-                    />
-                ) : (
-                    <span className={styles.label}>{formatValue(currentMin)}</span>
-                )}
+            <div className={styles.rangeRow}>
 
-                {editable ? (
-                    <input
-                        type="text"
-                        value={maxInput}
-                        onChange={handleMaxInputChange}
-                        onBlur={handleMaxInputBlur}
-                        className={styles.input}
-                        aria-label="Maximum value"
-                    />
-                ) : (
-                    <span className={styles.label}>{formatValue(currentMax)}</span>
-                )}
-            </div>
-            <div className={styles.rangeWrapper}> 
-                <div
-                ref={rangeRef}
-                className={styles.rangeTrack}
-            >
-                <div
-                    className={styles.rangeActive}
-                    style={{
-                        left: `${minPercentage}%`,
-                        width: `${maxPercentage - minPercentage}%`,
-                    }}
-                />
-                <div
-                    className={`${styles.handle} ${isDragging === 'min' ? styles.handleDragging : ''}`}
-                    style={{ left: `${minPercentage}%` }}
-                    onMouseDown={handleMouseDown('min')}
-                    role="slider"
-                    tabIndex={0}
-                    aria-label="Minimum handle"
-                    aria-valuemin={minValue}
-                    aria-valuemax={currentMax}
-                    aria-valuenow={currentMin}
-                />
-                <div
-                    className={`${styles.handle} ${isDragging === 'max' ? styles.handleDragging : ''}`}
-                    style={{ left: `${maxPercentage}%` }}
-                    onMouseDown={handleMouseDown('max')}
-                    role="slider"
-                    tabIndex={0}
-                    aria-label="Maximum handle"
-                    aria-valuemin={currentMin}
-                    aria-valuemax={maxValue}
-                    aria-valuenow={currentMax}
-                />                               
-            </div>
+                <div className={styles.valueContainer}>
+                    {editable ? (
+                        <div className={styles.inputWrapper}>
+                            <input
+                                type="text"
+                                value={minInput}
+                                onChange={handleMinInputChange}
+                                onBlur={handleMinInputBlur}
+                                className={styles.input}
+                                aria-label="Minimum value"
+                            />
+                            <span className={styles.currency}>€</span>
+                        </div>
+                    ) : (
+                        <span className={styles.label}>{formatValue(currentMin)}</span>
+                    )}
+                </div>
+
+                <div className={styles.rangeWrapper}> 
+                    <div
+                        ref={rangeRef}
+                        className={styles.rangeTrack}
+                    >
+                        <div
+                            className={styles.rangeActive}
+                            style={{
+                                left: `${minPercentage}%`,
+                                width: `${maxPercentage - minPercentage}%`,
+                            }}
+                        />
+
+                        <div
+                            className={`${styles.handle} ${isDragging === 'min' ? styles.handleDragging : ''}`}
+                            style={{ left: `${minPercentage}%` }}
+                            onMouseDown={handleMouseDown('min')}
+                            role="slider"
+                            tabIndex={0}
+                            aria-label="Minimum handle"
+                            aria-valuemin={minValue}
+                            aria-valuemax={currentMax}
+                            aria-valuenow={currentMin}
+                        />
+                        <div
+                            className={`${styles.handle} ${isDragging === 'max' ? styles.handleDragging : ''}`}
+                            style={{ left: `${maxPercentage}%` }}
+                            onMouseDown={handleMouseDown('max')}
+                            role="slider"
+                            tabIndex={0}
+                            aria-label="Maximum handle"
+                            aria-valuemin={currentMin}
+                            aria-valuemax={maxValue}
+                            aria-valuenow={currentMax}
+                        />                
+                    </div>
+                </div>
+
+                <div className={styles.valueContainer}>
+                    {editable ? (
+                        <div className={styles.inputWrapper}>
+                            <input
+                                type="text"
+                                value={maxInput}
+                                onChange={handleMaxInputChange}
+                                onBlur={handleMaxInputBlur}
+                                className={styles.input}
+                                aria-label="Maximum value"
+                            />
+                            <span className={styles.currency}>€</span>
+                        </div>
+                    ) : (
+                        <span className={styles.label}>{formatValue(currentMax)}</span>
+                    )}
+                </div>
             </div>
         </div>
     );
 }
+                   

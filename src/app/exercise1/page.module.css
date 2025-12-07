@@ -1,9 +1,8 @@
 .main {
   min-height: 100vh;
   display: flex;
-  align-items: center;
   justify-content: center;
-  padding: 2rem;
+  padding: 4rem 2rem 2rem 2rem;
 }
 
 .container {
@@ -21,6 +20,14 @@
   font-size: 1rem;
   color: #666;
   margin-bottom: 2rem;
+}
+
+/* Área reservada para el Range - evita layout shift */
+.rangeArea {
+  min-height: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .info {

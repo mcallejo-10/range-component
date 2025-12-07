@@ -43,6 +43,9 @@ export default function Exercise1() {
   const handleMaxChange = (value: number) => {
     setCurrentMax(Math.round(value * 100) / 100);
   };
+    const formatCurrency = (value: number): string => {
+    return `${value.toFixed(2)} €`;
+  };
 
   if (loading) {
     return (
@@ -73,24 +76,24 @@ export default function Exercise1() {
     <main className={styles.main}>
       <div className={styles.container}>
         <h1 className={styles.title}>Exercise 1: Normal Range</h1>
-        <p className={styles.description}>
-          Arrastra los handles o edita los valores directamente
-        </p>
 
-        <Range
-          type="normal"
-          minValue={minValue}
-          maxValue={maxValue}
-          currentMin={currentMin}
-          currentMax={currentMax}
-          onMinChange={handleMinChange}
-          onMaxChange={handleMaxChange}
-          editable={true}
-        />
+        <div className={styles.rangeArea}>
+          <Range
+            type="normal"
+            minValue={minValue}
+            maxValue={maxValue}
+            currentMin={currentMin}
+            currentMax={currentMax}
+            onMinChange={handleMinChange}
+            onMaxChange={handleMaxChange}
+            formatValue={formatCurrency}
+            editable={true}
+          />
+        </div>
 
         <div className={styles.info}>
-          <p>Rango permitido: {minValue} - {maxValue}</p>
-          <p>Valores seleccionados: {currentMin.toFixed(2)} - {currentMax.toFixed(2)}</p>
+          <p>Rango permitido: {formatCurrency(minValue)} - {formatCurrency(maxValue)}</p>
+          <p>Valores seleccionados: {formatCurrency(currentMin)} - {formatCurrency(currentMax)}</p>
         </div>
       </div>
     </main>
