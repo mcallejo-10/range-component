@@ -46,7 +46,7 @@ a {
 }
 
 .nav-brand {
-  font-size: 1.25rem;
+  font-size: 1.1rem;
   font-weight: 700;
   color: #000;
   transition: color 0.2s;
@@ -58,11 +58,13 @@ a {
 
 .nav-links {
   display: flex;
-  gap: 1.5rem;
+  gap: 1rem;
+
 }
 
 .nav-link {
-  padding: 0.5rem 1rem;
+  text-wrap: nowrap;
+  padding: 1rem 0.5rem;
   border-radius: 4px;
   font-weight: 600;
   color: #666;

@@ -2,7 +2,7 @@
     width: 100%;
     max-width: 600px;
     margin: 0 auto;
-    padding: 2rem;
+    padding: 0.5rem;
 }
 
 .rangeRow {
@@ -93,11 +93,27 @@
     cursor: grab;
     transition: transform 0.2s, box-shadow 0.2s;
     z-index: 2;
+    touch-action: none;
+    -webkit-tap-highlight-color: transparent;
 }
 
-.handle:hover {
-    transform: translate(-50%, -50%) scale(1.2);
-    box-shadow: 0 2px 8px rgba(102, 102, 102, 0.6);
+/* Área táctil más grande en móvil */
+.handle::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+}
+
+@media (hover: hover) {
+    .handle:hover {
+        transform: translate(-50%, -50%) scale(1.2);
+        box-shadow: 0 2px 8px rgba(102, 102, 102, 0.6);
+    }
 }
 
 .handle:active,

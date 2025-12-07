@@ -64,6 +64,12 @@ export default function Range({
         e.preventDefault();
         setIsDragging(handle);
     };
+
+    const handleTouchStart = (handle: 'min' | 'max') => (e: React.TouchEvent) => {
+        e.preventDefault();
+        setIsDragging(handle);
+    };
+
     const handleMouseMove = (e: MouseEvent) => {
         if (!isDragging) return;
         
@@ -78,7 +84,26 @@ export default function Range({
         }
     };
 
+    const handleTouchMove = (e: TouchEvent) => {
+        if (!isDragging) return;
+        
+        const touch = e.touches[0];
+        const value = getValueFromMousePosition(touch.clientX);
+        
+        if (isDragging === 'min') {
+            const newMin = Math.min(value, currentMax);
+            onMinChange(newMin);
+        } else {
+            const newMax = Math.max(value, currentMin);
+            onMaxChange(newMax);
+        }
+    };
+
     const handleMouseUp = () => {
+        setIsDragging(null);
+    };
+
+    const handleTouchEnd = () => {
         setIsDragging(null);
     };
 
@@ -87,10 +112,14 @@ export default function Range({
 
         window.addEventListener('mousemove', handleMouseMove);
         window.addEventListener('mouseup', handleMouseUp);
+        window.addEventListener('touchmove', handleTouchMove);
+        window.addEventListener('touchend', handleTouchEnd);
     
         return () => {
             window.removeEventListener('mousemove', handleMouseMove);
             window.removeEventListener('mouseup', handleMouseUp);
+            window.removeEventListener('touchmove', handleTouchMove);
+            window.removeEventListener('touchend', handleTouchEnd);
         };
     }, [isDragging, currentMin, currentMax, fixedValues, minValue, maxValue, type, onMinChange, onMaxChange]);
 
@@ -161,6 +190,7 @@ export default function Range({
                             className={`${styles.handle} ${isDragging === 'min' ? styles.handleDragging : ''}`}
                             style={{ left: `${minPercentage}%` }}
                             onMouseDown={handleMouseDown('min')}
+                            onTouchStart={handleTouchStart('min')}
                             role="slider"
                             tabIndex={0}
                             aria-label="Minimum handle"
@@ -172,6 +202,7 @@ export default function Range({
                             className={`${styles.handle} ${isDragging === 'max' ? styles.handleDragging : ''}`}
                             style={{ left: `${maxPercentage}%` }}
                             onMouseDown={handleMouseDown('max')}
+                            onTouchStart={handleTouchStart('max')}
                             role="slider"
                             tabIndex={0}
                             aria-label="Maximum handle"
