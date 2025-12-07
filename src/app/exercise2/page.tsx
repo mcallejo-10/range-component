@@ -44,7 +44,6 @@ export default function Exercise2() {
     setCurrentMax(value);
   };
 
-  // Función para formatear valores como moneda
   const formatCurrency = (value: number): string => {
     return `${value.toFixed(2)} €`;
   };

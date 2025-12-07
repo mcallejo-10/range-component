@@ -3,7 +3,6 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 import Exercise2 from './page';
 import * as rangeService from '@/services/rangeService';
 
-// Mock del servicio
 vi.mock('@/services/rangeService', () => ({
   fetchFixedRangeValues: vi.fn(),
 }));
@@ -16,7 +15,6 @@ describe('Exercise2 Page', () => {
   });
 
   it('should render loading state initially', () => {
-    // Mock con promesa que nunca se resuelve para capturar loading
     vi.mocked(rangeService.fetchFixedRangeValues).mockImplementation(
       () => new Promise(() => {})
     );
@@ -34,15 +32,12 @@ describe('Exercise2 Page', () => {
 
     render(<Exercise2 />);
 
-    // Esperar a que desaparezca el loading
     await waitFor(() => {
       expect(screen.queryByText('Loading data...')).not.toBeInTheDocument();
     });
 
-    // Verificar que se renderiza el título
     expect(screen.getByText('Exercise 2: Fixed Values Range')).toBeInTheDocument();
 
-    // Verificar que se muestra la lista de valores disponibles
     expect(screen.getByText('Available values:')).toBeInTheDocument();
   });
 
@@ -53,12 +48,9 @@ describe('Exercise2 Page', () => {
 
     render(<Exercise2 />);
 
-    // Esperar a que aparezca el error
     await waitFor(() => {
       expect(screen.getByText('Error loading range data')).toBeInTheDocument();
     });
-
-    // Verificar botón de reintentar
     expect(screen.getByRole('button', { name: /retry/i })).toBeInTheDocument();
   });
 
@@ -69,7 +61,6 @@ describe('Exercise2 Page', () => {
 
     render(<Exercise2 />);
 
-    // Verificar que se llamó al servicio
     expect(rangeService.fetchFixedRangeValues).toHaveBeenCalledTimes(1);
   });
 
@@ -84,11 +75,9 @@ describe('Exercise2 Page', () => {
       expect(screen.queryByText('Loading data...')).not.toBeInTheDocument();
     });
 
-    // Verificar que existen los sliders (Range renderiza 2 inputs de tipo range)
     const sliders = screen.getAllByRole('slider');
     expect(sliders).toHaveLength(2);
 
-    // En Exercise 2, editable={false}, por lo que NO debe haber inputs editables
     const textInputs = screen.queryAllByRole('textbox');
     expect(textInputs).toHaveLength(0);
   });
@@ -104,10 +93,8 @@ describe('Exercise2 Page', () => {
       expect(screen.queryByText('Loading data...')).not.toBeInTheDocument();
     });
 
-    // Verificar que todos los valores están presentes con formato correcto
     mockFixedValues.forEach((value) => {
       const formattedValue = `${value.toFixed(2)} €`;
-      // Usar getAllByText porque el valor puede aparecer más de una vez
       const elements = screen.getAllByText(formattedValue);
       expect(elements.length).toBeGreaterThan(0);
     });
@@ -124,11 +111,9 @@ describe('Exercise2 Page', () => {
       expect(screen.queryByText('Loading data...')).not.toBeInTheDocument();
     });
 
-    // Los valores iniciales deben ser el primero y el último del array
     const firstValue = mockFixedValues[0];
     const lastValue = mockFixedValues[mockFixedValues.length - 1];
 
-    // Estos valores deberían estar presentes (aparecen múltiples veces: Range + lista)
     const allFirstValues = screen.getAllByText(`${firstValue.toFixed(2)} €`);
     const allLastValues = screen.getAllByText(`${lastValue.toFixed(2)} €`);
     
@@ -164,7 +149,6 @@ describe('Exercise2 Page', () => {
       expect(screen.queryByText('Loading data...')).not.toBeInTheDocument();
     });
 
-    // La página debería renderizarse mostrando el mensaje de error del componente
     expect(screen.getByText('Exercise 2: Fixed Values Range')).toBeInTheDocument();
   });
 
@@ -179,7 +163,6 @@ describe('Exercise2 Page', () => {
       expect(screen.queryByText('Loading data...')).not.toBeInTheDocument();
     });
 
-    // La página debería renderizarse sin errores con un solo valor
     expect(screen.getByText('Exercise 2: Fixed Values Range')).toBeInTheDocument();
     expect(screen.getAllByText('5.99 €').length).toBeGreaterThan(0);
   });
@@ -196,7 +179,6 @@ describe('Exercise2 Page', () => {
       expect(screen.queryByText('Loading data...')).not.toBeInTheDocument();
     });
 
-    // Verificar formato con exactamente 2 decimales (aparecen múltiples veces)
     expect(screen.getAllByText('1.50 €').length).toBeGreaterThan(0);
     expect(screen.getAllByText('2.79 €').length).toBeGreaterThan(0);
     expect(screen.getAllByText('3.10 €').length).toBeGreaterThan(0);

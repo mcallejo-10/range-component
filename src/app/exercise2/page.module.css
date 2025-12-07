@@ -22,7 +22,6 @@
   margin-bottom: 2rem;
 }
 
-/* Área reservada para el Range - evita layout shift */
 .rangeArea {
   min-height: 150px;
   display: flex;

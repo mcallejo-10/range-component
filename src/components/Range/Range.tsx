@@ -15,7 +15,6 @@ export default function Range({
     formatValue = (value: number) => value.toString(),
     editable = true,
 }: RangeProps ) {
-    // Defensive validations to prevent crashes
     if (minValue === undefined || maxValue === undefined || 
         currentMin === undefined || currentMax === undefined) {
         return <div className={styles.container}>Error: invalid range values</div>;
@@ -145,7 +144,8 @@ export default function Range({
         const value = parseFloat(maxInput);
         if (!isNaN(value)) {
             const validValue = Math.min(maxValue, Math.max(value, currentMin));
-            onMaxChange(validValue);   
+            onMaxChange(validValue);
+            setMaxInput(validValue.toString());
         } else {
             setMaxInput(currentMax.toString());
         }

@@ -5,7 +5,6 @@ const simulateNetworkDelay = () => {
     return new Promise(resolve => setTimeout(resolve, delay));
 };
 
-// Exercice 1: Normal Range Service
 export const fetchNormalRangeValues = async (): Promise<NormalRangeResponse> => {
     await simulateNetworkDelay();
     return {
@@ -14,7 +13,6 @@ export const fetchNormalRangeValues = async (): Promise<NormalRangeResponse> => 
     };
 }
 
-// Exercice 2: Fixed Range Service
 export const fetchFixedRangeValues = async (): Promise<FixedRangeResponse> => {
     await simulateNetworkDelay();
     return {

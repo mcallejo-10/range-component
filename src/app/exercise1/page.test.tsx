@@ -3,7 +3,6 @@ import { render, screen, waitFor } from '@testing-library/react';
 import Exercise1 from './page';
 import * as rangeService from '@/services/rangeService';
 
-// Mock del servicio
 vi.mock('@/services/rangeService', () => ({
   fetchNormalRangeValues: vi.fn(),
 }));
@@ -14,7 +13,6 @@ describe('Exercise1 Page', () => {
   });
 
   it('should render loading state initially', () => {
-    // Mock con promesa que nunca se resuelve para capturar loading
     vi.mocked(rangeService.fetchNormalRangeValues).mockImplementation(
       () => new Promise(() => {})
     );
@@ -26,7 +24,6 @@ describe('Exercise1 Page', () => {
   });
 
   it('should load and display range data successfully', async () => {
-    // Mock con datos correctos
     vi.mocked(rangeService.fetchNormalRangeValues).mockResolvedValue({
       min: 1,
       max: 100,
@@ -34,38 +31,31 @@ describe('Exercise1 Page', () => {
 
     render(<Exercise1 />);
 
-    // Esperar a que desaparezca el loading
     await waitFor(() => {
       expect(screen.queryByText('Loading data...')).not.toBeInTheDocument();
     });
 
-    // Verificar que se renderiza el título
     expect(screen.getByText('Exercise 1: Normal Range')).toBeInTheDocument();
 
-    // Verificar que se muestra la información del rango
     expect(screen.getByText(/Allowed range:/)).toBeInTheDocument();
     expect(screen.getByText(/Selected values:/)).toBeInTheDocument();
     
-    // Los valores 1.00 € y 100.00 € aparecen múltiples veces en la página
     const rangoPermitido = screen.getByText(/Allowed range:/).textContent;
     expect(rangoPermitido).toContain('1.00 €');
     expect(rangoPermitido).toContain('100.00 €');
   });
 
   it('should display error state when service fails', async () => {
-    // Mock con error
     vi.mocked(rangeService.fetchNormalRangeValues).mockRejectedValue(
       new Error('Network error')
     );
 
     render(<Exercise1 />);
 
-    // Esperar a que aparezca el error
     await waitFor(() => {
       expect(screen.getByText('Error loading range data')).toBeInTheDocument();
     });
 
-    // Verificar botón de reintentar
     expect(screen.getByRole('button', { name: /retry/i })).toBeInTheDocument();
   });
 
@@ -77,7 +67,6 @@ describe('Exercise1 Page', () => {
 
     render(<Exercise1 />);
 
-    // Verificar que se llamó al servicio
     expect(rangeService.fetchNormalRangeValues).toHaveBeenCalledTimes(1);
   });
 
@@ -93,11 +82,9 @@ describe('Exercise1 Page', () => {
       expect(screen.queryByText('Loading data...')).not.toBeInTheDocument();
     });
 
-    // Verificar que existen los sliders (Range renderiza 2 inputs de tipo range)
     const sliders = screen.getAllByRole('slider');
     expect(sliders).toHaveLength(2);
 
-    // Verificar que los inputs editables están presentes (type="text" con formateo)
     const textInputs = screen.getAllByRole('textbox');
     expect(textInputs).toHaveLength(2);
   });
@@ -114,7 +101,6 @@ describe('Exercise1 Page', () => {
       expect(screen.queryByText('Loading data...')).not.toBeInTheDocument();
     });
 
-    // Verificar formato con 2 decimales y símbolo € (aparece múltiples veces)
     const rangoText = screen.getByText(/Allowed range:/).textContent;
     expect(rangoText).toContain('5.50 €');
     expect(rangoText).toContain('50.75 €');
@@ -132,7 +118,6 @@ describe('Exercise1 Page', () => {
       expect(screen.queryByText('Loading data...')).not.toBeInTheDocument();
     });
 
-    // Los valores seleccionados inicialmente deben ser iguales al rango
     const rangoText = screen.getByText(/Allowed range:/);
     const valoresText = screen.getByText(/Selected values:/);
     

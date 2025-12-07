@@ -22,7 +22,6 @@
   margin-bottom: 2rem;
 }
 
-/* Área reservada para el Range - evita layout shift */
 .rangeArea {
   min-height: 150px;
   display: flex;
@@ -32,7 +31,7 @@
 
 .info {
   font-size: 0.875rem;
-  color: #666;
+  color: #4c4c4c;
   margin-top: 0.5rem;
   text-align: center;
 }
